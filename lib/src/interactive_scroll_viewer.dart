@@ -14,8 +14,8 @@ class InteractiveScrollViewer extends StatefulWidget {
   final Axis scrollDirection;
 
   InteractiveScrollViewer(
-      {@required this.children,
-      @required this.scrollToId,
+      {required this.children,
+      required this.scrollToId,
       this.scrollDirection = Axis.vertical});
 
   @override

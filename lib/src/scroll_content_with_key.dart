@@ -7,7 +7,7 @@ class ScrollContentWithKey {
   final String id;
   final GlobalKey key;
 
-  ScrollContentWithKey({this.child, this.key, this.id});
+  ScrollContentWithKey({required this.child, required this.key, required this.id});
 
   factory ScrollContentWithKey.fromWithout(ScrollContent scrollContent) {
     return ScrollContentWithKey(

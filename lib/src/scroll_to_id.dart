@@ -4,20 +4,20 @@ import 'package:scroll_to_id/src/scroll_content_with_key.dart';
 class ScrollToId {
   final ScrollController scrollController;
   List<ScrollContentWithKey> scrollContentsList = [];
-  Axis scrollDirection;
+  late Axis scrollDirection;
 
-  ScrollToId({this.scrollController});
+  ScrollToId({required this.scrollController});
 
   /// Get id by scroll position
-  String idPosition() {
+  String? idPosition() {
     double sumSize = 0;
     for (ScrollContentWithKey scrollContents in scrollContentsList) {
       /// Update Scroll target size
       if (scrollDirection == Axis.vertical) {
         /// Default
-        sumSize += scrollContents.key.currentContext.size.height;
+        sumSize += scrollContents.key.currentContext!.size!.height;
       } else {
-        sumSize += scrollContents.key.currentContext.size.width;
+        sumSize += scrollContents.key.currentContext!.size!.width;
       }
 
       if (scrollController.offset < sumSize) {
@@ -30,7 +30,7 @@ class ScrollToId {
   /// This function is to scroll with animation.
   /// The first argument is id(String), not height(double).
   Future<void> animateTo(String id,
-      {@required Duration duration, @required Curve curve}) async {
+      {required Duration duration, required Curve curve}) async {
     Function _function = (double offset) {
       scrollController.animateTo(offset, duration: duration, curve: curve);
     };
@@ -48,11 +48,14 @@ class ScrollToId {
 
   /// This function is to scroll to next id with animation.
   Future<void> animateToNext(
-      {@required Duration duration, @required Curve curve}) async {
+      {required Duration duration, required Curve curve}) async {
     Function _function = (double offset) {
       scrollController.animateTo(offset, duration: duration, curve: curve);
     };
-    _scroll(id: _getNextId(number: 1), scrollFunction: _function);
+    _scroll(
+      id: _getNextId(number: 1),
+      scrollFunction: _function,
+    );
   }
 
   /// This function is to jump to next id.
@@ -65,7 +68,7 @@ class ScrollToId {
 
   /// This function is to scroll to before id with animation.
   Future<void> animateToBefore(
-      {@required Duration duration, @required Curve curve}) async {
+      {required Duration duration, required Curve curve}) async {
     Function _function = (double offset) {
       scrollController.animateTo(offset, duration: duration, curve: curve);
     };
@@ -82,15 +85,15 @@ class ScrollToId {
 
   /// get next id by position
   /// i is next, -1 is before
-  String _getNextId({int number}) {
+  String? _getNextId({required int number}) {
     double sumSize = 0;
     for (int i = 0; i < scrollContentsList.length; i++) {
       /// Update Scroll target size
       if (scrollDirection == Axis.vertical) {
         /// Default
-        sumSize += scrollContentsList[i].key.currentContext.size.height;
+        sumSize += scrollContentsList[i].key.currentContext!.size!.height;
       } else {
-        sumSize += scrollContentsList[i].key.currentContext.size.width;
+        sumSize += scrollContentsList[i].key.currentContext!.size!.width;
       }
 
       if (scrollController.offset < sumSize) {
@@ -107,7 +110,7 @@ class ScrollToId {
 
   /// This function is to scroll to the widget that holds id.
   /// id is a required parameter that defines a default position to scroll.
-  void _scroll({String id, Function scrollFunction}) {
+  void _scroll({String? id, required Function scrollFunction}) {
     /// Scroll target size
     double sumSize = 0;
 
@@ -132,9 +135,9 @@ class ScrollToId {
           /// Update Scroll target size
           if (scrollDirection == Axis.vertical) {
             /// Default
-            sumSize += scrollContents.key.currentContext.size.height;
+            sumSize += scrollContents.key.currentContext!.size!.height;
           } else {
-            sumSize += scrollContents.key.currentContext.size.width;
+            sumSize += scrollContents.key.currentContext!.size!.width;
           }
         } catch (e) {
           print('$e');

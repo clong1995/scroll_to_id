@@ -1,10 +1,10 @@
 name: scroll_to_id
 description: scroll_to_id is a Flutter library that enables screen to auto-scroll by selecting id defined for each widget in scrollview.
-version: 1.4.0
+version: 2.0.0-nullsafety.0
 homepage: https://github.com/yusukeinouehatchout/scroll_to_id
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.20.0"
 
 dependencies:
@@ -14,6 +14,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  test: ^1.16.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
